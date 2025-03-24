@@ -1,4 +1,5 @@
 from typing import Any
+import sys
 
 from stats import number_of_words
 from stats import number_of_characters
@@ -17,11 +18,16 @@ def get_book_text(filepath):
 
 
 def main():
-    filepath = "books/frankenstein.txt"
+    if len(sys.argv) != 2:
+        print("Usage: python3 main.py <path_to_book>")
+        sys.exit(1)
+
+    filepath = sys.argv[1]
+
     book_text = get_book_text(filepath)
     if book_text:
         print("============ BOOKBOT ============")
-        print("Analyzing book found at books/frankenstein.txt...")
+        print(f"Analyzing book found at {filepath}...")
         print("----------- Word Count ----------")
         word_count = number_of_words(book_text)
         print("--------- Character Count -------")
